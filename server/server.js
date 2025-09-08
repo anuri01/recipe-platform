@@ -13,7 +13,7 @@ import Recipe from './models/Recipe.js';
 const app = express();
 
 // express 미들웨어 설정
-app.use(cors()) // cross orgin 설정
+app.use(cors()); // cross orgin 설정
 app.use(express.json());
 app.use(express.urlencoded({extended: true})) // 옛날 방식 데이터 주고받을때. 
 
@@ -80,7 +80,7 @@ app.post('/api/users/signup', async ( req, res ) => {
         // 이미 존재하는 아이디 체크
         const existingUser = await User.findOne({ username });
         if (existingUser) {
-            return res.status(409).json({ message: '이미 사용중인 아이디 입니디ㅏ.' });
+            return res.status(409).json({ message: '이미 사용중인 아이디 입니다.' });
         }
 
         // 비밀번호 해싱은 pre로 처리
