@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import Menu from "./Menu";
+import useLayerStore from "../store/layerStore";
 import './Header.css'
 
 function MainHeader() {
     const [ keyword, setKeyword ] = useState('');
+    const { openLayer, closeLayer} = useLayerStore();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -37,7 +41,8 @@ function MainHeader() {
                     </form>
                 {/* </div> */}
             </div>
-            <img onClick={openToMenu} className="menu" src="images/menu_icon.png" alt="메뉴아이콘"></img>
+            <img onClick={openLayer} className="menu" src="images/menu_icon.png" alt="메뉴아이콘"></img>
+            <Menu />
 
         </div>
     )

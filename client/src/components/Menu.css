@@ -1,0 +1,127 @@
+.auth-link {
+    color: #31BBE5 !important;
+    font-weight: bold;
+    font-size: 1.05em;
+    transition: color 0.18s;
+    display: inline-block;
+}
+.auth-link:hover {
+    color: #1a9ecb !important;
+}
+.menu-overlay {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease visivility 0.3s ease;
+}
+
+.menu-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.menu-container {
+    position: absolute;
+    top:0;
+    right:0;
+    width: 270px;
+    height: 100vh;
+    background-color: white;
+    z-index: 2000;
+    transform: translateX(100%); /* 오른쪽 화면에 숨김 */
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-container.open {
+    transform: translateX(0);  /* 열렸을 때 제자리로 */
+}
+
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9rem 1.5rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.util-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.util-group h2 {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.util-group p {
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+.menu-container a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.menu-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 2rem;
+}
+
+
+.menu-nav ul {
+    margin: 0;
+    padding: 0
+}
+
+.menu-nav li {
+    list-style: none;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+}
+
+.menu-nav li:hover {
+  background-color: #f8f9fa;
+}
+
+.menu-nav li::before {
+    content: '👉🏻';
+    font-size: 1rem;
+    margin-right: 0.5rem;
+}
+
+.menu-nav a {
+    text-decoration: none;
+    color: #343a40;
+    font-size: 0.875rem;
+    /* padding: 0.8rem 1rem; */
+
+
+}
+
+.close-btn {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background : none;
+    border: none;
+    cursor: pointer;
+    font-size: 2rem;
+    text-decoration: none;
+}
+
+.close-btn.position {
+    top: -14px;
+}
