@@ -11,6 +11,11 @@ function MainHeader() {
 
     }
 
+    const openToMenu = (e) => {
+        e.preventDefault();
+        toast('전체메뉴는 준비중입니다.')
+    }
+
     return (
         <div className="main-header">
             <a href="/">
@@ -32,6 +37,7 @@ function MainHeader() {
                     </form>
                 {/* </div> */}
             </div>
+            <img onClick={openToMenu} className="menu" src="images/menu_icon.png" alt="메뉴아이콘"></img>
 
         </div>
     )
