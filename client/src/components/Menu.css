@@ -120,8 +120,9 @@
     cursor: pointer;
     font-size: 2rem;
     text-decoration: none;
+    top: -17px;
+    font-family: inherit;
 }
 
-.close-btn.position {
-    top: -14px;
-}
+/* .close-btn.position {
+} */

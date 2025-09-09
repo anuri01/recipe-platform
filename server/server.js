@@ -34,7 +34,7 @@ const authmiddleware =  async () => {
 }
 
 // 사용자 로그인 api
-app.get('/api/login', async ( req, res ) => {
+app.post('/api/users/login', async ( req, res ) => {
     try {
         const { password, username } = req.body;
         
@@ -59,7 +59,7 @@ app.get('/api/login', async ( req, res ) => {
             {expiresIn: '1h'}
         );
 
-        res.json({token, message: '로그인 성공'});
+        res.json({token, user, message: '로그인 성공'});
 
     } catch (error) {
         return res.status(500).json({message: '로그인 중 에러가 발생했습니다.'})
