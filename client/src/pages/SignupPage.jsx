@@ -105,7 +105,7 @@ function SignupPage() {
         }
         return (
             <div className="page-container">
-                <div className="signup-header">
+                <div className="auth-header">
                     <img src="images/large_logo.png" className="logo-image"></img>
                     <h1> 아빠요리 회원가입 </h1>
                     <p>가입에 필요한 정보를 입력하세요.</p>

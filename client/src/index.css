@@ -98,7 +98,7 @@ body.scroll-rock {
   background-color: #909090;
 }
 
-.signup-header {
+.auth-header {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -107,16 +107,16 @@ body.scroll-rock {
   padding-bottom: 2rem;
 }
 
-.signup-header p {
+.auth-header p {
   margin: 0;
 }
 
-.signup-header img {
+.auth-header img {
   width: 60px;
   height: 60px;
 }
 
-.signup-header h1 {
+.auth-header h1 {
   font-size: 1.25rem;
   margin: 0;
 }

@@ -6,7 +6,7 @@ import './Menu.css';
 
 function Menu() {
 
-const { openLayer, closeLayer, isLayerOpen } = useLayerStore();
+const { closeLayer, isLayerOpen } = useLayerStore();
 const { isLoggedIn, user } = useUserStore();
 
 useEffect(() => {
