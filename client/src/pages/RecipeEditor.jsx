@@ -8,7 +8,8 @@ function RecipeEditor () {
     const [ title, setTitle ] = useState('');
     const [ description, setDescription ] = useState('');
     const [ cookingTime, setCookingTime ] = useState(0);
-    const [ ingredients, setIngredients ] = useState(['']);
+    const [ ingredients, setIngredients ] = useState([]);
+    const [ currentIngredients, setCurrentIngredients ] = useState('');
     const [ mainImageFile, setMainImageFile ] = useState(null);
     const [ recipeImageFiles, setRecipeImageFiles ] = useState([])
     const [ isLodading, setIsLoading ] = useState(false);
@@ -17,12 +18,17 @@ function RecipeEditor () {
     const handleIngredientChange = (index, value) => {
         const newIngredients = [...ingredients];
         newIngredients[index] = value;
-        setIngredients(newIngredients);
+        setIngredients(...ingredients, value);
     };
 
     // 재료 입력창 추가 버튼
-    const addIngredientField = () => {
-        setIngredients([...ingredients, '']);
+    const addIngredient = () => {
+        if(currentIngredients.trim()) {
+        setIngredients([...ingredients, currentIngredients.trim()]); // 현재 입력재료를 재료 배열에 입력
+        setCurrentIngredients(''); // 입력창 초기화
+        } else {
+            toast.error('재료를 입력해 주세요.');
+        }
     };
     
     // 재료 입력창 삭제 버튼
@@ -31,7 +37,13 @@ function RecipeEditor () {
         setIngredients(newIngredients);
     };
 
-
+    // 엔터키로 재료 추가
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            addIngredient();
+        }
+    };
     
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -87,6 +99,28 @@ function RecipeEditor () {
                         maxLength={5000}
                         />
                 </div>
+                <div className="form-group require">
+                    <label>준비재료</label> 
+                        <div className="ingredient-input-group">
+                            <input
+                                className="input-text"
+                                type="text"
+                                value={currentIngredients}
+                                onChange={(e) => setCurrentIngredients(e.target.value)}
+                                onKeyPress={handleKeyPress}
+                                placeholder="예: 계란 2개"
+                            />
+                            <button type="button" onClick={addIngredient} className="action-button button-primary">재료추가</button>
+                        </div>                
+                    { ingredients.length > 0 && (<ul className="ingredient-group">
+                        {ingredients.map((ingredients, index) => (
+                            <div key={index} className="ingredient-item">
+                                <li className="ingredient-list">{ingredients}</li>
+                                <button type="button" onClick={() => removeIngredientField(index)} className="remove-btn">X</button>
+                            </div>
+                        ))}
+                    </ul>)}
+                </div>
                 <div className="form-group file-attach">
                     <label>메인 이미지<span style={{ color: "red" }}>(필수)</span></label>
                     <div className="file-attach-group">
@@ -95,24 +129,7 @@ function RecipeEditor () {
                     <input id="mainImage" type="file" onChange={(e) => setMainImageFile(e.target.files[0])} required />
                     </div>
                 </div>
-                <div className="form-group">
-                    <label>필요재료</label>
-                    {ingredients.map((ingredient, index) => (
-                        <div key={index} className="ingredient-input-group">
-                            <input
-                                className="input-text"
-                                type="text"
-                                value={ingredient}
-                                onChange={(e) => handleIngredientChange(index, e.target.value)}
-                                placeholder="예: 계란 2개"
-                            />
-                            {ingredients.length > 1 && (
-                                <button type="button" onClick={() => removeIngredientField(index)} className="remove-btn">삭제</button>
-                            )}
-                        </div>
-                    ))}
-                    <button type="button" onClick={addIngredientField} className="add-btn">+ 재료 추가</button>
-                </div>
+                
 
             </form>
         </div>
