@@ -8,6 +8,8 @@ import bcrypt from 'bcryptjs';
 import jwt from "jsonwebtoken"
 import User from './models/User.js';
 import Recipe from './models/Recipe.js';
+import upload from './upload.js';
+import { s3 } from './upload.js';
 
 // express 앱 설정
 const app = express();
@@ -130,12 +132,24 @@ app.get('/api/recipes', async ( req, res ) => {
 })
 
 // 레시피 등록
-app.post('/api/recipes', authmiddleware, async ( req, res ) => {
+app.post('/api/recipes', 
+    authmiddleware, 
+    upload.fields([
+         {name: 'mainImage', maxCount: 1},
+         {name: 'recipeImages', maxCount:10}]),
+        async ( req, res ) => {
+
+        try {
+        const { title, description } = req.body;
+        } catch (error) {
+            res.status(500).json({message: '서버 오류 발생'})
+        }
 
 }) 
 
 // 레시피 수정
 app.put('/api/recipes/:id', async ( req, res ) => {
+
 
 })
 

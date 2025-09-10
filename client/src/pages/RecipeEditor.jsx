@@ -59,7 +59,7 @@ function RecipeEditor () {
         // 배열이나 객체는 문자열로 변환해 보내야 한다!!
         formData.append('content', JSON.stringify({description, cookingTime, ingredients}));
         formData.append('mainImage', mainImageFile);
-        recipeImageFiles.forEach(file => {formData.append('recipeImageFiles', file)});
+        recipeImageFiles.forEach(file => {formData.append('recipeImages', file)});
 
         try {
             setIsLoading(true)
