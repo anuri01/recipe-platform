@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import api from "../api/axiosConfig";
 import './RecipeEditor.css';
@@ -7,20 +7,19 @@ import './RecipeEditor.css';
 function RecipeEditor () {
     const [ title, setTitle ] = useState('');
     const [ description, setDescription ] = useState('');
-    const [ cookingTime, setCookingTime ] = useState(null);
+    const [ cookingTime, setCookingTime ] = useState('');
     const [ ingredients, setIngredients ] = useState([]);
     const [ currentIngredients, setCurrentIngredients ] = useState('');
     const [ mainImageFile, setMainImageFile ] = useState(null);
     const [ recipeImageFiles, setRecipeImageFiles ] = useState([]);
     const [ category, setCategory ] = useState('');
     const [ isLodading, setIsLoading ] = useState(false);
+    const navigate = useNavigate();
 
-     // 재료 입력창 변경 핸들러
-    const handleIngredientChange = (index, value) => {
-        const newIngredients = [...ingredients];
-        newIngredients[index] = value;
-        setIngredients(...ingredients, value);
-    };
+      const clickToCancel = () => {
+            // 이전 페이지로 이동
+            navigate(-1);
+        }
 
     // 재료 입력창 추가 버튼
     const addIngredient = () => {
@@ -140,7 +139,7 @@ function RecipeEditor () {
                     <div className="file-attach-group">
                     <p className="fileName">{ mainImageFile ? mainImageFile.name : '완성된 요리 이미지를 등록하세요'} </p>
                     <label htmlFor="mainImage" className="action-button button-primary">파일선택</label>
-                    <input id="mainImage" type="file" onChange={(e) => setMainImageFile(e.target.files[0])} required />
+                    <input id="mainImage" type="file" onChange={(e) => setMainImageFile(e.target.files[0])} />
                     </div>
                 </div>
                 <div className="form-group">
@@ -209,7 +208,7 @@ function RecipeEditor () {
                     </div>
                 </div>
                 <div className="cta-group">
-                    <Link to="-1" className="button button-secondary sub">취소</Link>
+                    <Link onClick={clickToCancel} className="button button-secondary sub">취소</Link>
                     <button type="submit" className="button button-primary main" disabled={isLodading}>
                         {isLodading ? '등록 중...' : '등록하기'}
                     </button>
