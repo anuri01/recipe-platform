@@ -7,11 +7,12 @@ import './RecipeEditor.css';
 function RecipeEditor () {
     const [ title, setTitle ] = useState('');
     const [ description, setDescription ] = useState('');
-    const [ cookingTime, setCookingTime ] = useState(0);
+    const [ cookingTime, setCookingTime ] = useState(null);
     const [ ingredients, setIngredients ] = useState([]);
     const [ currentIngredients, setCurrentIngredients ] = useState('');
     const [ mainImageFile, setMainImageFile ] = useState(null);
-    const [ recipeImageFiles, setRecipeImageFiles ] = useState([])
+    const [ recipeImageFiles, setRecipeImageFiles ] = useState([]);
+    const [ category, setCategory ] = useState('');
     const [ isLodading, setIsLoading ] = useState(false);
 
      // 재료 입력창 변경 핸들러
@@ -49,11 +50,13 @@ function RecipeEditor () {
         e.preventDefault();
         const formData = new FormData();
         
-        if(!title || !description || !cookingTime || !ingredients || !mainImageFile) {
-            toast.error('제목과 레시피 내용을 필수 입니다.');
+        if(!title || !description || !cookingTime || ingredients.length === 0 || !category || !mainImageFile) {
+            toast.error('모든 필수 항목을 입력해주세요.');
+            return;
         }
 
         formData.append('title', title);
+        formData.append('category', category);
         // 배열이나 객체는 문자열로 변환해 보내야 한다!!
         formData.append('content', JSON.stringify({description, cookingTime, ingredients}));
         formData.append('mainImage', mainImageFile);
@@ -100,7 +103,18 @@ function RecipeEditor () {
                         />
                 </div>
                 <div className="form-group require">
-                    <label>준비재료</label> 
+                    <label>예상 조리시간</label>
+                    <input className="input-text"
+                        type="text"
+                        placeholder="조리 시간을 입력하세요.(분)"
+                        value={cookingTime} 
+                        onChange={(e) => setCookingTime(e.target.value)}
+                        maxLength={10}
+                    />
+                </div>
+                
+                <div className="form-group require">
+                    <label>재료</label> 
                         <div className="ingredient-input-group">
                             <input
                                 className="input-text"
@@ -129,8 +143,79 @@ function RecipeEditor () {
                     <input id="mainImage" type="file" onChange={(e) => setMainImageFile(e.target.files[0])} required />
                     </div>
                 </div>
+                <div className="form-group">
+                    <label>카테고리</label>
+                    <div className="radio-group">
+                        <label>
+                            <input
+                                type="radio"
+                                name="category"
+                                value="Korean"
+                                checked={category === 'Korean'}
+                                onChange={(e) => setCategory(e.target.value)}
+                            />
+                            한식
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="category"
+                                value="Western"
+                                checked={category === 'Western'}
+                                onChange={(e) => setCategory(e.target.value)}
+                            />
+                            양식
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="category"
+                                value="Chinese"
+                                checked={category === 'Chinese'}
+                                onChange={(e) => setCategory(e.target.value)}
+                            />
+                            중식
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="category"
+                                value="Japanese"
+                                checked={category === 'Japanese'}
+                                onChange={(e) => setCategory(e.target.value)}
+                            />
+                            일식
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="category"
+                                value="Pastry"
+                                checked={category === 'Pastry'}
+                                onChange={(e) => setCategory(e.target.value)}
+                            />
+                            디저트
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="category"
+                                value="Baking"
+                                checked={category === 'Baking'}
+                                onChange={(e) => setCategory(e.target.value)}
+                            />
+                            제빵
+                        </label>
+                    </div>
+                </div>
+                <div className="cta-group">
+                    <Link to="-1" className="button button-secondary sub">취소</Link>
+                    <button type="submit" className="button button-primary main" disabled={isLodading}>
+                        {isLodading ? '등록 중...' : '등록하기'}
+                    </button>
+                </div>
                 
-
+                    
             </form>
         </div>
     )

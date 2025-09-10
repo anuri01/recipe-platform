@@ -44,6 +44,14 @@ body.scroll-rock {
   max-width: 800px;
 }
 
+.button.main {
+  flex: 7;
+}
+
+.button.sub {
+  flex: 3;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -235,7 +243,20 @@ body.scroll-rock {
   border: 1px solid #959595;
 }
 
+.radio-group {
+  padding-top: 0.75rem;;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
 
+.radio-group label{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;  
+}
 
 /* .hidden {
   display: none;
