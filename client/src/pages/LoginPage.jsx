@@ -58,7 +58,7 @@ function LoginPage () {
                 <button type="submit" className="button button-primary">로그인</button>
                 </div>
             </form>
-            <div className="social-login-section">
+            <div className="social-section">
                 <div className="divider">
                     <span>또는</span>
                 </div>

@@ -25,6 +25,14 @@ function SignupGate() {
                     소셜로 시작하기
                 </button>
             </div>
+            <div className='socoal-section'>
+            <div className='divider'>
+                <span>또는</span>
+            </div>
+
+             <p style={{textAlign: 'center', color: '#888'}}>소셜 가입 준비 중</p>
+            </div>
+
 
             <p className="auth-link-text">
                 이미 계정이 있으신가요? <Link to="/login">로그인</Link>
