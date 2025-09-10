@@ -29,7 +29,21 @@ app.get('/api', (req, res) => {
 });
 
 // 로그인 체크 미들웨어 
-const authmiddleware =  async () => {
+const authmiddleware =  async (req, res, next) => {
+    try {
+        const authHeader = req.header.Authorization;
+        if(!authHeader || !authHeader.startsWith('Bearer ')) {
+            return res.status(401).json({message: '토큰이 확인되지 않습니다.'});
+        }
+
+        const token = authHeader.split(' ')[1]; // 접두어와 토근 사이 공백으로 구분해 배열로 저장 후 토큰 할당
+        const decoded = jwt.verify(token, process.env.JWT_SECRET) // 토큰을 시크리릿로 검증
+
+        req.user = { id: decoded._id, username: decoded.username, role: decoded.role}
+        return next();
+    } catch (error) {
+        res.status(500).json({message: '서버 오류가 발생(인증)'});
+    }
 
 }
 
@@ -116,7 +130,7 @@ app.get('/api/recipes', async ( req, res ) => {
 })
 
 // 레시피 등록
-app.post('/api/recipes', async ( req, res ) => {
+app.post('/api/recipes', authmiddleware, async ( req, res ) => {
 
 }) 
 

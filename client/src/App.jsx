@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 import SignupGate from './pages/SignupGate';
 import RecipeEditor from './pages/RecipeEditor';
 import Header from './components/Header';
+import ProtectedRoute from './components/ProtectedRoute';
 // import HomePage from './pages/HomePage';
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
         <main className='app-main'>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/recipes/editor" element={<RecipeEditor/>} />
+            <Route path="/recipes/editor" element={<ProtectedRoute><RecipeEditor/></ProtectedRoute>} />
             <Route path="/signup/form" element={<SignupPage />}/>
             <Route path="/signup" element={<SignupGate />}/>
             <Route path="/login" element={<LoginPage />}/>
