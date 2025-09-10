@@ -9,6 +9,8 @@ function Header() {
     // 페이지 경로에 따라 동적으로 제목을 할당하는 함수
     const getPageTitle = (pathname) => {
         if(pathname.startsWith('/signup')) return '회원가입';
+        if(pathname.startsWith('/recipes/editor')) return '레시피 등록';
+        if(pathname === '/recipes') return '레시피 목록';
         if(pathname === '/login') return '로그인';
         // 추후 경로 추가
 

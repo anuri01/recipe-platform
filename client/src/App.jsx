@@ -5,6 +5,7 @@ import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import SignupGate from './pages/SignupGate';
+import RecipeEditor from './pages/RecipeEditor';
 import Header from './components/Header';
 // import HomePage from './pages/HomePage';
 
@@ -20,6 +21,7 @@ function App() {
         <main className='app-main'>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/recipes/editor" element={<RecipeEditor/>} />
             <Route path="/signup/form" element={<SignupPage />}/>
             <Route path="/signup" element={<SignupGate />}/>
             <Route path="/login" element={<LoginPage />}/>

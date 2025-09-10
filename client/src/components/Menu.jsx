@@ -7,7 +7,7 @@ import './Menu.css';
 function Menu() {
 
 const { closeLayer, isLayerOpen } = useLayerStore();
-const { isLoggedIn, logout } = useUserStore();
+const { isLoggedIn, logout, user } = useUserStore();
 
 useEffect(() => {
     if(isLayerOpen) {
@@ -33,7 +33,7 @@ return (
             <div className="util-group">
             { isLoggedIn ? (
                 <>
-                <h2><Link to='/profile' onClick={closeLayer} className="auth-link">{'홍길동'/*{user.username}*/}</Link> 님 안녕하세요!</h2>
+                <h2><Link to='/profile' onClick={closeLayer} className="auth-link">{user.username}</Link> 님 안녕하세요!</h2>
                 <button
                 onClick={handleLogout} 
                 className="auth-link, button-secondary">로그아웃</button>
