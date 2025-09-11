@@ -72,7 +72,7 @@ function RecipeEditor () {
             setIsLoading(true)
             const response = await api.post('/recipes', formData);
             toast.success('레시피가 등록되었습니다.');
-            navigate(`recipes/${response.data._id}`)
+            navigate(`/recipes/${response.data._id}`)
         
         } catch(error) {
             toast.error('레시피 등록에 실패했습니다.')

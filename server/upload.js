@@ -23,7 +23,7 @@ const upload = multer({
         },
         contentType: multerS3.AUTO_CONTENT_TYPE, // 파일 타입 자동감지
     }),
-    limits: { fileSize: 3 * 1024 * 1024},
+    limits: { fileSize: 5 * 1024 * 1024},
 });
 
 export { s3 };

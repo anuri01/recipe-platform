@@ -41,7 +41,7 @@ const authmiddleware =  async (req, res, next) => {
         const token = authHeader.split(' ')[1]; // 접두어와 토근 사이 공백으로 구분해 배열로 저장 후 토큰 할당
         const decoded = jwt.verify(token, process.env.JWT_SECRET) // 토큰을 시크리릿로 검증
 
-        req.user = { id: decoded._id, username: decoded.username, role: decoded.role}
+        req.user = { id: decoded.id, username: decoded.username, role: decoded.role}
         return next();
     } catch (error) {
         res.status(500).json({message: '서버 오류가 발생(인증)'});
@@ -140,8 +140,38 @@ app.post('/api/recipes',
         async ( req, res ) => {
 
         try {
-        const { title, description } = req.body;
+        const { title, content, category } = req.body;
+        const parsedContent = JSON.parse(content); // JSON 파싱
+
+        console.log('Files:', req.files);  // 디버깅용
+        console.log('Body:', req.body);    // 디버깅용
+        console.log('content:', parsedContent);    // 디버깅용
+
+        // 파일 URL 처리 
+        const mainImageUrl = req.files.mainImage ? req.files.mainImage[0].location : null;
+        const recipeImageUrl = req.files.recipeImages ? req.files.recipeImages.map(file => file.location) : [];
+
+        if(!title || !content || !category || !mainImageUrl) {
+            return res.status(400).json({message: '필수 항목 입력을 확인해 주세요'});
+        }
+
+        const newRecipe = new Recipe({
+            title: title,
+            content: parsedContent,
+            category: category,
+            imageUrl: {
+                mainImage : mainImageUrl,
+                recipeImage: recipeImageUrl,
+            },
+            creator: req.user.id,
+        })
+        // 저장 후 해당 객체를 전달해야 id가 전달됨.
+        const recipeInfro = await newRecipe.save();
+        res.status(201).json(recipeInfro);
+
+
         } catch (error) {
+            console.error('레시피 등록중 오류 발샘', error)
             res.status(500).json({message: '서버 오류 발생'})
         }
 
