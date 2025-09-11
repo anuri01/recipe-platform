@@ -183,6 +183,23 @@ app.put('/api/recipes/:id', async ( req, res ) => {
 
 })
 
+// 레시피 상세
+app.get('api/recipes/:id', async ( req, res ) => {
+    try {
+        const { recipeId } = req.params;
+        const recipe = await Recipe.findById(recipeId).populate('creator', 'username');
+
+        if(!recipe) {
+            return res.status(404).json({message : '레시피를 찾을 수 없습니다.'});
+        };
+
+        res.status(200).json(recipe);
+
+        } catch (error) {
+            res.status(500).json({message: '서버 오류 발생'});
+    }
+});
+
 // 레시피 삭제
 app.delete('api/recipes/:id', async ( req, res ) => {
 
