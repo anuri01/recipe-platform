@@ -14,7 +14,7 @@ const useUserStore = create((set) => {
     if(token) {
         const decodedToken = jwtDecode(token);
         if(decodedToken.exp * 1000 > Date.now()) {
-            initialState = { token, isLoggedIn: false, user: decodedToken};
+            initialState = { token, isLoggedIn: true, user: decodedToken};
         } else {
             localStorage.removeItem('token')
         }

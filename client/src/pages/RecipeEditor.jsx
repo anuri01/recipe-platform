@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import api from "../api/axiosConfig";
@@ -12,7 +12,7 @@ function RecipeEditor () {
     const [ currentIngredients, setCurrentIngredients ] = useState('');
     const [ mainImageFile, setMainImageFile ] = useState(null);
     const [ recipeImageFiles, setRecipeImageFiles ] = useState([]);
-    const [ category, setCategory ] = useState('');
+    const [ category, setCategory ] = useState('Korean');
     const [ isLodading, setIsLoading ] = useState(false);
     const navigate = useNavigate();
 
@@ -36,6 +36,13 @@ function RecipeEditor () {
         const newIngredients = ingredients.filter((_, i) => i !== index);
         setIngredients(newIngredients);
     };
+
+      // 조리 이미지 삭제 버튼
+    const removeRecipeImage = (index) => {
+        const NewRecipeImages = recipeImageFiles.filter((_, i) => i !== index);
+        setRecipeImageFiles(NewRecipeImages);
+    };
+
 
     // 엔터키로 재료 추가
     const handleKeyPress = (e) => {
@@ -63,8 +70,9 @@ function RecipeEditor () {
 
         try {
             setIsLoading(true)
-            await api.post('/api/recipes', formData);
+            const response = await api.post('/recipes', formData);
             toast.success('레시피가 등록되었습니다.');
+            navigate(`recipes/${response.data._id}`)
         
         } catch(error) {
             toast.error('레시피 등록에 실패했습니다.')
@@ -134,8 +142,31 @@ function RecipeEditor () {
                         ))}
                     </ul>)}
                 </div>
+                     <div className="form-group file-attach">
+                    <label>조리 이미지</label>
+                    <div className="file-attach-group">
+                    <p className="fileName">{ recipeImageFiles.length > 0 ? `${recipeImageFiles.length} 개 파일 선택됨` : '이미지를 등록하세요.(최대 10개)'} </p>
+                    <label htmlFor="recipeImage" className="action-button button-primary">파일선택</label>
+                    <input id="recipeImage" type="file" 
+                        onChange={(e) => {
+                            const selectedFile = e.target.files[0];
+                            if(selectedFile) {
+                            setRecipeImageFiles([...recipeImageFiles, selectedFile]);
+                            e.target.value = ''; // 동일 파일 재선택 가능하게 인풋 초기화
+                            }
+                            }} />
+                    </div>
+                       { recipeImageFiles.length > 0 && (<ul className="ingredient-group">
+                        {recipeImageFiles.map((recipeImg, index) => (
+                            <div key={index} className="ingredient-item">
+                                <li className="ingredient-list">{recipeImg.name}</li>
+                                <button type="button" onClick={() => removeRecipeImage(index)} className="remove-btn">X</button>
+                            </div>
+                        ))}
+                    </ul>)}
+                </div>
                 <div className="form-group file-attach">
-                    <label>메인 이미지<span style={{ color: "red" }}>(필수)</span></label>
+                    <label>완성 이미지<span style={{ color: "red" }}>(필수)</span></label>
                     <div className="file-attach-group">
                     <p className="fileName">{ mainImageFile ? mainImageFile.name : '완성된 요리 이미지를 등록하세요'} </p>
                     <label htmlFor="mainImage" className="action-button button-primary">파일선택</label>

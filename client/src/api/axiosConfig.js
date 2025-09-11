@@ -4,7 +4,7 @@ import { jwtDecode } from "jwt-decode";
 
 // axios 라이브러리에서는 create 팩토리 함수로 객체 생성함.
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'http://locathost:4700/api'
+    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:4700/api'
 })
 
 //요청 인터셉트. 요청을 보낼때 로그인 상태를 다시 체크하고 토큰을 헤더에 실어 보내 로그인 사용자임을 알린다. 
@@ -17,9 +17,10 @@ api.interceptors.request.use(
             if(decodedToken.exp * 1000 < Date.now()){
                 useUserStore.getState().logout();
                 window.location.href = '/';
+                return Promise.reject(new Error('토큰이 만료되었습니다.'));
             }
             // Bearer 구분자를 붙여서 보낸다. 공백 포함.
-            config.headers.Authorization = `Bearer ${token}`;
+            config.headers.authorization = `Bearer ${token}`;
         }
         // 👇 FormData일 때는 Content-Type을 설정하지 않음
         if (config.data instanceof FormData) {

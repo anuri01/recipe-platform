@@ -33,7 +33,7 @@ app.get('/api', (req, res) => {
 // 로그인 체크 미들웨어 
 const authmiddleware =  async (req, res, next) => {
     try {
-        const authHeader = req.header.Authorization;
+        const authHeader = req.headers.authorization;
         if(!authHeader || !authHeader.startsWith('Bearer ')) {
             return res.status(401).json({message: '토큰이 확인되지 않습니다.'});
         }
@@ -72,7 +72,7 @@ app.post('/api/users/login', async ( req, res ) => {
         const token = jwt.sign(
             { id: user._id, username: user.username, role: user.role },
             process.env.JWT_SECRET,
-            {expiresIn: '1h'}
+            {expiresIn: '1h'},
         );
 
         res.json({token, user, message: '로그인 성공'});
