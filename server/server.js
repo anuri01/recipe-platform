@@ -143,10 +143,6 @@ app.post('/api/recipes',
         const { title, content, category } = req.body;
         const parsedContent = JSON.parse(content); // JSON 파싱
 
-        console.log('Files:', req.files);  // 디버깅용
-        console.log('Body:', req.body);    // 디버깅용
-        console.log('content:', parsedContent);    // 디버깅용
-
         // 파일 URL 처리 
         const mainImageUrl = req.files.mainImage ? req.files.mainImage[0].location : null;
         const recipeImageUrl = req.files.recipeImages ? req.files.recipeImages.map(file => file.location) : [];
@@ -178,16 +174,18 @@ app.post('/api/recipes',
 }) 
 
 // 레시피 수정
-app.put('/api/recipes/:id', async ( req, res ) => {
+app.put('/api/recipes/edit/:id', async ( req, res ) => {
 
 
 })
 
 // 레시피 상세
-app.get('api/recipes/:id', async ( req, res ) => {
+app.get('/api/recipes/:id', async ( req, res ) => {
     try {
-        const { recipeId } = req.params;
+        const recipeId  = req.params.id;
+        console.log('아이디', req.params.id)
         const recipe = await Recipe.findById(recipeId).populate('creator', 'username');
+        console.log('데이터', recipe)
 
         if(!recipe) {
             return res.status(404).json({message : '레시피를 찾을 수 없습니다.'});

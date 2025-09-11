@@ -7,7 +7,7 @@ const recipeSchema = new mongoose.Schema({
     type: {
         description: { type: String, required: true },
         ingredients: [{ type: String, required: true }],
-        cookingTime: { type: Number, required: true }
+        cookingTime: { type: String, required: true }
         },
     required: true
     },

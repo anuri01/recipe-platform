@@ -8,6 +8,7 @@ import SignupGate from './pages/SignupGate';
 import RecipeEditor from './pages/RecipeEditor';
 import Header from './components/Header';
 import ProtectedRoute from './components/ProtectedRoute';
+import RecipeDetailPage from './pages/RecipeDetailPage';
 // import HomePage from './pages/HomePage';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/recipes/editor" element={<ProtectedRoute><RecipeEditor/></ProtectedRoute>} />
+            <Route path="/recipes/detail/:recipeId" element={<RecipeDetailPage/>} />
             <Route path="/signup/form" element={<SignupPage />}/>
             <Route path="/signup" element={<SignupGate />}/>
             <Route path="/login" element={<LoginPage />}/>
