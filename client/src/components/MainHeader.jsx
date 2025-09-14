@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import toast from 'react-hot-toast'
 import Menu from './Menu'
 import useLayerStore from '../store/layerStore'
@@ -8,14 +8,16 @@ import './Header.css'
 function MainHeader() {
   const [keyword, setKeyword] = useState('')
   const {openLayer, closeLayer} = useLayerStore()
+  const navigate = useNavigate()
 
   const handleSubmit = e => {
     e.preventDefault()
-    toast('검색기능은 준비중입니다.')
+    navigate(`/recipes?keyword=${keyword}`)
   }
 
   const openToMenu = e => {
     e.preventDefault()
+
     toast('전체메뉴는 준비중입니다.')
   }
 
