@@ -1,29 +1,39 @@
-import React from "react";
-import { useLocation, Link } from "react-router-dom";
-import MainHeader from "./MainHeader";
-import SubHeader from "./SubHeader";
+import React from 'react'
+import {useLocation, Link} from 'react-router-dom'
+import MainHeader from './MainHeader'
+import SubHeader from './SubHeader'
 
-function Header() {
-    const location = useLocation();
-
-    // 페이지 경로에 따라 동적으로 제목을 할당하는 함수
-    const getPageTitle = (pathname) => {
-        if(pathname.startsWith('/signup')) return '회원가입';
-        if(pathname.startsWith('/recipes/editor')) return '레시피 등록';
-        if(pathname === '/recipes') return '레시피 목록';
-        if(pathname.startsWith('/recipes/detail')) return '레시피 상세';
-        if(pathname === '/login') return '로그인';
-        // 추후 경로 추가
-
-        return '';
-    }
-    
-    const isHomePage = location.pathname === '/';
-    const title = getPageTitle(location.pathname);
-
-    return (
-        isHomePage ? <MainHeader /> : <SubHeader title={title}/>
-    )
+// 모든 페이지 설정을 한 곳에서 관리
+const PAGE_CONFIG = {
+  '/signup': {title: '회원가입', showMenu: false},
+  '/login': {title: '로그인', showMenu: false},
+  '/recipes/editor': {title: '레시피 등록', showMenu: false},
+  '/recipes': {title: '레시피 목록', showMenu: true}
+  // 새로운 설정 추가가 쉬움
+  // '/profile': { title: '프로필', showMenu: true, showBack: false },
 }
 
-export default Header;
+function Header() {
+  const location = useLocation()
+
+  const getPageConfig = pathname => {
+    // 정확한 경로 매칭 객체 키에 /가 있을 경우는 . 로 접근하지 않고 [] 로 접근함.
+    if (PAGE_CONFIG[pathname]) {
+      return PAGE_CONFIG[pathname]
+    }
+
+    // 동적 경로 처리
+    if (pathname.startsWith('/recipes/detail')) {
+      return {title: '레시피 상세', showMenu: true}
+    }
+
+    return {title: '', showMenu: true}
+  }
+
+  const isHomePage = location.pathname === '/'
+  const {title, showMenu} = getPageConfig(location.pathname)
+
+  return isHomePage ? <MainHeader /> : <SubHeader title={title} showMenu={showMenu} />
+}
+
+export default Header
