@@ -10,6 +10,7 @@
 }
 
 body {
+  position: relative;
   margin: 0;
   background-color: #f0f2f5;
 }
@@ -31,6 +32,7 @@ a {
 .app-main {
   padding: 1rem;
   flex-grow: 1;
+  padding-bottom: 76px;
 }
 
 /* 모바일 화면을 흉내 내는 전체 컨테이너 */

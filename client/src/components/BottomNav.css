@@ -1,0 +1,36 @@
+.bottom-nav {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%); /* 중앙정렬 */
+  width: 100%;
+  height: 60px;
+  background-color: white;
+  border-top: 1px solid #e9ecef;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
+}
+
+.nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #868e96; /* 비활성 색상 */
+  font-size: 0.75rem;
+  flex-grow: 1;
+  height: 100%;
+}
+
+.nav-icon {
+  font-size: 1.5rem;
+  margin-bottom: 2px;
+}
+
+.nav-link.active {
+  color: #31bbe5; /* 활성 색상 */
+  font-weight: bold;
+}
