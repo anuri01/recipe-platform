@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {Link} from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -6,6 +6,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import './RecipeSlider.css';
 
 function RecipeSlider({recipes}) {
+  const isDragging = useRef(false);
   const settings = {
     dots: true,
     infinite: false,
@@ -19,14 +20,33 @@ function RecipeSlider({recipes}) {
           slidesToShow: 1
         }
       }
-    ]
+    ],
+    beforeChange: () => {
+      isDragging.current = true;
+    },
+    afterChange: () => {
+      if (isDragging.current) {
+        setTimeout(() => {
+          isDragging.current = false;
+        }, 0);
+      }
+    }
+  };
+
+  const handleLinkClick = (e) => {
+    if (isDragging.current) {
+      e.preventDefault();
+    }
   };
   return (
     <div className="recipe-slider-container">
       <Slider {...settings}>
         {recipes.map((recipe) => (
           <div key={recipe._id} className="slider-item">
-            <Link to={`/recipes/detail/${recipe._id}`} className="recipe-card-link">
+            <Link
+              to={`/recipes/detail/${recipe._id}`}
+              onClick={handleLinkClick}
+              className="recipe-card-link">
               <div className="recipe-card">
                 <img
                   src={recipe.imageUrl.mainImage}
