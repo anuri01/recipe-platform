@@ -11,8 +11,12 @@ function RecipeSlider({recipes}) {
     dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow: 1, // 기본적으로 2개 표시
+    slidesToShow: 1, // 2로 하면 기본적으로 2개 표시
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    pauseOnHover: true,
+
     responsive: [
       {
         breakpoint: 800,
@@ -48,14 +52,14 @@ function RecipeSlider({recipes}) {
               onClick={handleLinkClick}
               className="recipe-card-link">
               <div className="recipe-card">
+                <div className="recipe-card-content">
+                  <h3>{recipe.title}</h3>
+                </div>
                 <img
                   src={recipe.imageUrl.mainImage}
                   alt={recipe.title}
                   className="recipe-card-image"
                 />
-                <div className="recipe-card-content">
-                  <h3>{recipe.title}</h3>
-                </div>
               </div>
             </Link>
           </div>
