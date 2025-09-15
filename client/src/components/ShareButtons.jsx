@@ -35,6 +35,9 @@ function ShareButtons({recipe}) {
           <button onClick={handleClipboardCopy} className="share-btn copy-btn">
             링크 복사
           </button>
+          <button onClick={handleKakaoShare} className="share-btn kakao-btn">
+            카카오톡 공유
+          </button>
         </>
       ) : (
         // 데스크탑: 카카오톡, 링크 복사 버튼
