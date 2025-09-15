@@ -1,0 +1,26 @@
+.share-buttons-container {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+
+.share-btn {
+  flex-grow: 1;
+  border: none;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.kakao-btn {
+  background-color: #fee500;
+  color: #191919;
+}
+
+.copy-btn {
+  background-color: #e9ecef;
+  color: #495057;
+}

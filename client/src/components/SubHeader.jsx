@@ -1,12 +1,12 @@
-import React from 'react'
-import {useNavigate} from 'react-router-dom'
-import useLayerStore from '../store/layerStore'
-import Menu from './Menu'
-import './Header.css'
+import React from 'react';
+import {useNavigate} from 'react-router-dom';
+import useLayerStore from '../store/layerStore';
+import Menu from './Menu';
+import './Header.css';
 
 function SubHeader({title, showMenu}) {
-  const navigate = useNavigate()
-  const {openLayer, closeLayer} = useLayerStore()
+  const navigate = useNavigate();
+  const {openLayer, closeLayer} = useLayerStore();
 
   return (
     <header className="sub-header">
@@ -20,12 +20,12 @@ function SubHeader({title, showMenu}) {
         <img
           onClick={openLayer}
           className="menu"
-          src="images/menu_icon.png"
+          src="/images/menu_icon.png"
           alt="메뉴아이콘"></img>
       )}
       <Menu />
     </header>
-  )
+  );
 }
 
-export default SubHeader
+export default SubHeader;

@@ -90,3 +90,79 @@ li {
   background-color: #959595;
   border-radius: 8px;
 }
+
+/* 공유하기 섹션 스타일 */
+.share-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-top: 1px solid #eee;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.share-section h2 {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: #333;
+  text-align: center;
+}
+
+.share-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.share-button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 120px;
+}
+
+.system-share {
+  background-color: #007aff;
+  color: white;
+}
+
+.system-share:hover {
+  background-color: #0056cc;
+  transform: translateY(-2px);
+}
+
+.clipboard-share {
+  background-color: #34c759;
+  color: white;
+}
+
+.clipboard-share:hover {
+  background-color: #28a745;
+  transform: translateY(-2px);
+}
+
+.kakao-share {
+  background-color: #fee500;
+  color: #3c1e1e;
+}
+
+.kakao-share:hover {
+  background-color: #ffdd02;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+  .share-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .share-button {
+    width: 100%;
+    max-width: 250px;
+  }
+}

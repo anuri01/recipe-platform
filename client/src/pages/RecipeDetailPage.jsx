@@ -1,34 +1,36 @@
-import React, {useState, useEffect} from 'react'
-import toast from 'react-hot-toast'
-import api from '../api/axiosConfig'
-import {useParams} from 'react-router-dom'
-import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-import './RecipeDetailPage.css'
+import React, {useState, useEffect} from 'react';
+import toast from 'react-hot-toast';
+import api from '../api/axiosConfig';
+import {useParams} from 'react-router-dom';
+import Slider from 'react-slick';
+import ShareButtons from '../components/ShareButtons';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import './RecipeDetailPage.css';
 
 function RecipeDetailPage() {
-  const [isLoading, setIsLoading] = useState(true)
-  const [recipe, setRecipe] = useState(null)
-  const {recipeId} = useParams()
+  const [isLoading, setIsLoading] = useState(true);
+  const [recipe, setRecipe] = useState(null);
+  const {recipeId} = useParams();
 
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     const feachRecipe = async () => {
       try {
-        const response = await api.get(`/recipes/${recipeId}`)
-        setRecipe(response.data)
-        console.log('레시피 데이터:', response.data)
-      } catch (error) {
-        toast.error('레시피 정보를 가져오는 도중 오류가 발생했습니다.')
+        const response = await api.get(`/recipes/${recipeId}`);
+        setRecipe(response.data);
+        console.log('레시피 데이터:', response.data);
+      } catch (err) {
+        console.error('레시피 로딩 실패:', err);
+        toast.error('레시피 정보를 가져오는 도중 오류가 발생했습니다.');
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
-    }
-    feachRecipe()
-  }, [recipeId])
+    };
+    feachRecipe();
+  }, [recipeId]);
 
-  isLoading && <p className="loading-message">레시피 정보를 불러오는 중입니다.</p>
+  isLoading && <p className="loading-message">레시피 정보를 불러오는 중입니다.</p>;
 
   return (
     <div className="page-container recipe-detail-container">
@@ -75,8 +77,10 @@ function RecipeDetailPage() {
           </Slider>
         </div>
       )}
+
+      {recipe && <ShareButtons recipe={recipe} />}
     </div>
-  )
+  );
 }
 
-export default RecipeDetailPage
+export default RecipeDetailPage;
