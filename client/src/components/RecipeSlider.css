@@ -1,0 +1,38 @@
+.recipe-slider-container {
+  margin-bottom: 2rem;
+}
+
+.slider-item {
+  padding: 0 0.5rem; /* 슬라이드 간의 좌우 간격 */
+}
+
+.recipe-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.recipe-card {
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: white;
+}
+
+.recipe-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: fill;
+}
+
+.recipe-card-content {
+  padding: 1rem;
+}
+
+.recipe-card-content h3 {
+  font-size: 1rem;
+  text-align: center;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* 제목이 길면 ...으로 표시 */
+}
