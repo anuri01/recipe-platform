@@ -37,7 +37,7 @@ function Menu() {
                   </Link>{' '}
                   님 안녕하세요!
                 </h2>
-                <button onClick={handleLogout} className="auth-link, button-secondary">
+                <button onClick={handleLogout} className="auth-link button-secondary">
                   로그아웃
                 </button>
               </>
