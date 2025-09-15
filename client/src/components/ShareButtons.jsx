@@ -32,9 +32,6 @@ function ShareButtons({recipe}) {
           <button onClick={handleNativeShare} className="share-btn">
             공유하기
           </button>
-          <button onClick={handleKakaoShare} className="share-btn kakao-btn">
-            카카오톡 공유
-          </button>
           <button onClick={handleClipboardCopy} className="share-btn copy-btn">
             링크 복사
           </button>
