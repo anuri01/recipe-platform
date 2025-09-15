@@ -1,0 +1,88 @@
+.search-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  /* padding-bottom: 1rem; */
+}
+
+.divider_bold {
+  border-bottom: 2px solid #adb5bd;
+  margin: 1rem 0;
+  width: 420px; /* 원하는 전체 너비로 고정 */
+  max-width: 100vw; /* 화면을 넘지 않도록 제한 */
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%); /* 가운데 정렬 */
+  box-sizing: border-box;
+}
+
+.recipe-list-container {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: white;
+}
+
+.recipe-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+  color: #333;
+}
+
+.header-title {
+  font-size: 1rem;
+  flex-grow: 1;
+  padding-right: 0.5rem;
+}
+
+.header-author {
+  font-size: 1rem;
+}
+
+.recipe-list {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.recipe-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.recipeitem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 8px;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s;
+}
+
+.recipeitem:last-child {
+  border-bottom: none;
+}
+
+.recipeitem:hover {
+  background-color: #f0f0f0;
+}
+
+.recipe-title1 {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+}
+
+.recipe-author {
+  color: #666;
+  font-size: 0.9rem;
+}
